@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -5,6 +6,23 @@ import static org.testng.AssertJUnit.assertEquals;
 
 class MainTest {
     private static final int N_NUMBERS = 1_000_000;
+
+    @Test
+    public void squareTest() {
+        Assertions.assertEquals(100, Main.square(10));
+        Assertions.assertEquals(100, Main.square(-10));
+    }
+
+    @Test
+    public void isSubstringTest() {
+        String str = "blobloblobloblokbloblo.";
+        assertTrue(Main.isSubstring(str, "blok"));
+        assertTrue(Main.isSubstring(str, "kblob"));
+        assertTrue(Main.isSubstring(str, "oblo."));
+        assertFalse(Main.isSubstring(str, "blod"));
+        assertFalse(Main.isSubstring(str, "bok"));
+        assertFalse(Main.isSubstring(str, "loko"));
+    }
 
     @Test
     void isSumTwo() {
