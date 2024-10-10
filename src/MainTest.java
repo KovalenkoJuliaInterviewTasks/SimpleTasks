@@ -6,6 +6,27 @@ import static org.testng.AssertJUnit.assertEquals;
 
 class MainTest {
     private static final int N_NUMBERS = 1_000_000;
+    String word = "electricity";
+
+    @Test
+    void testAnagramTrue() {
+        assertTrue(Main.isAnagram(word, "electric"));
+        assertTrue(Main.isAnagram(word, "city"));
+        assertTrue(Main.isAnagram(word, "tric"));
+        assertTrue(Main.isAnagram(word, "try"));
+        assertTrue(Main.isAnagram(word, "let"));
+        assertTrue(Main.isAnagram(word, "tet"));
+    }
+
+    @Test
+    void testAnagramFalse() {
+        assertFalse(Main.isAnagram(word, " "));
+        assertFalse(Main.isAnagram(word, ""));
+        assertFalse(Main.isAnagram(word, null));
+        assertFalse(Main.isAnagram(word, "tetet"));
+        assertFalse(Main.isAnagram(word, "ci ty"));
+        assertFalse(Main.isAnagram(word, "a"));
+    }
 
     @Test
     public void squareTest() {

@@ -1,7 +1,32 @@
+import java.util.*;
+
 public class Main {
 
     public static void main(String[] args) {
 
+    }
+
+    public static boolean isAnagram(String word, String anagram) {
+        if (word == null || word.isBlank() || anagram == null || anagram.isBlank())
+            return false;
+        if (anagram.length() > word.length())
+            return false;
+
+        char[] letters = word.toCharArray();
+
+        Map<Character, Integer> res = new HashMap<>();
+
+        for (Character c : letters) {
+            res.merge(c, 1, (o, v) -> o + v);
+        }
+
+        char[] lettersAnagram = anagram.toCharArray();
+        for (Character c : lettersAnagram) {
+            int count = res.merge(c, -1, Integer::sum);
+            if (count == -1)
+                return false;
+        }
+        return true;
     }
 
     public static int square(int x) {
