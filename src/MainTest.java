@@ -9,6 +9,19 @@ class MainTest {
     String word = "electricity";
 
     @Test
+    public void testHasValidBrackets() {
+        String src = "aaaaaa (sdfsdfdsf[dfd(f)f] zcvzxcv {{[ghjk]}} asd )";
+        String src1 = "{}";
+        String src2 = ")dfgswfgsf(";
+        String src3 = "[werwert(wertwrtw] wertrt)";
+
+        assertTrue(Main.hasValidBrackets(src));
+        assertTrue(Main.hasValidBrackets(src1));
+        assertFalse(Main.hasValidBrackets(src2));
+        assertFalse(Main.hasValidBrackets(src3));
+    }
+
+    @Test
     void testAnagramTrue() {
         assertTrue(Main.isAnagram(word, "electric"));
         assertTrue(Main.isAnagram(word, "city"));

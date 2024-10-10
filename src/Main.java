@@ -6,6 +6,47 @@ public class Main {
 
     }
 
+    public static int maxSubsequenceLength(int[] arr) {
+//    The method accepts array of integers and returns the length of longest sub-sequence, consisting of repeating number.
+//    For example, if input is 1,3,3,2,8,8,8,5,6,6 the result is 3 - the length of longest subsequence 8,8,8
+//    The non-repeating number would  be considered as "subsequence of length 1".
+//    The result for empty array would be 0.
+//    Write it in one pass through array.
+        return 0;
+    }
+
+    private static String openingBrackets = "([{";
+    private static String closingBrackets = ")]}";
+
+    public static boolean hasValidBrackets(String text) {
+//        Check that 3 types of brackets: (), [], {} are used properly in text represented by String.
+//        The brackets could be nested. Without using collection
+//        Correct nesting example:	aaaaaa (sdfsdfdsf[dfd(f)f] zcvzxcv {{[ghjk]}} asd )
+//        Incorrect examples:
+//        a. invalid brackets order   )dfgswfgsf(
+//        b. invlaid nesting order:   [werwert(wertwrtw] wertrt)
+        StringBuilder bracketsStack = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            if (openingBrackets.indexOf(text.charAt(i)) >= 0)
+                bracketsStack.append(text.charAt(i));
+            else if (closingBrackets.indexOf(text.charAt(i)) >= 0) {
+                if (bracketsStack.isEmpty() || !removeIfCouple(bracketsStack, text.charAt(i)))
+                    return false;
+            }
+        }
+        return bracketsStack.isEmpty();
+    }
+
+    private static boolean removeIfCouple(StringBuilder bracketsStack, char closingBracket) {
+        char coupledOpeningBracket = openingBrackets.charAt(closingBrackets.indexOf(closingBracket));
+        char lastStackBracket = bracketsStack.charAt(bracketsStack.length() - 1);
+        if (lastStackBracket == coupledOpeningBracket) {
+            bracketsStack.deleteCharAt(bracketsStack.length() - 1);
+            return true;
+        }
+        return false;
+    }
+
     public static boolean isAnagram(String word, String anagram) {
         if (word == null || word.isBlank() || anagram == null || anagram.isBlank())
             return false;
